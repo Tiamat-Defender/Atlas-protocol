@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "LORA/lora.h"
 #include "pico/stdlib.h"
 
 #define LORA_TX 0
