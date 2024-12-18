@@ -6,7 +6,7 @@
 
 uint8_t index = 0;
 
-int INIT_LORA(uint8_t TX, uint8_t RX, uint8_t UART_TYPE)
+uint8_t INIT_LORA(uint8_t TX, uint8_t RX, uint8_t UART_TYPE)
 {
     char buff[3];
 
@@ -40,48 +40,48 @@ int INIT_LORA(uint8_t TX, uint8_t RX, uint8_t UART_TYPE)
 
 }
 
-int LORA_SEND()
+uint8_t LORA_SEND()
 {
     uart_puts(uart0, "AT+SEND=%i,%i,%i,%i");
 }
 
-int LORA_READ()
+uint8_t LORA_READ()
 {
     uart_puts(uart0, "AT+SEND=%i,%i,%i,%i");
 
 
 }
 
-int LORA_GET_UID()
+uint8_t LORA_GET_UID()
 {
     uart_puts(uart0, "AT+SEND=%i,%i,%i,%i");
 }
 
-int LORA_SET_MODE()
-{
-    uart_puts(uart0, "AT+SEND=%i,%i,%i,%i");
-
-}
-
-int LORA_SET_PARAMS()
+uint8_t LORA_SET_MODE()
 {
     uart_puts(uart0, "AT+SEND=%i,%i,%i,%i");
 
 }
 
-int LORA_SETA_ADDR()
+uint8_t LORA_SET_PARAMS()
 {
     uart_puts(uart0, "AT+SEND=%i,%i,%i,%i");
 
 }
 
-int LORA_SET_NET_ID()
+uint8_t LORA_SETA_ADDR()
 {
     uart_puts(uart0, "AT+SEND=%i,%i,%i,%i");
 
 }
 
-int LORA_FACTORY_RESET()
+uint8_t LORA_SET_NET_ID()
+{
+    uart_puts(uart0, "AT+SEND=%i,%i,%i,%i");
+
+}
+
+uint8_t LORA_FACTORY_RESET()
 {
     uart_puts(uart0, "AT+SEND=%i,%i,%i,%i");
 
