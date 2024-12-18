@@ -30,15 +30,61 @@ int INIT_LORA(uint8_t TX, uint8_t RX, uint8_t UART_TYPE)
                     {
 
                         if(strcmp(buff, "+ok"))return 0;
+                        else return 1;
                     }
                 
             }
         }
-    }else if (UART_TYPE == 1){   
-        uart_init(uart1, DEFBAUD);
-
-
     }else return 1;
     
 
 }
+
+int LORA_SEND()
+{
+    uart_puts(uart0, "AT+SEND=%i,%i,%i,%i");
+}
+
+int LORA_READ()
+{
+    uart_puts(uart0, "AT+SEND=%i,%i,%i,%i");
+
+
+}
+
+int LORA_GET_UID()
+{
+    uart_puts(uart0, "AT+SEND=%i,%i,%i,%i");
+}
+
+int LORA_SET_MODE()
+{
+    uart_puts(uart0, "AT+SEND=%i,%i,%i,%i");
+
+}
+
+int LORA_SET_PARAMS()
+{
+    uart_puts(uart0, "AT+SEND=%i,%i,%i,%i");
+
+}
+
+int LORA_SETA_ADDR()
+{
+    uart_puts(uart0, "AT+SEND=%i,%i,%i,%i");
+
+}
+
+int LORA_SET_NET_ID()
+{
+    uart_puts(uart0, "AT+SEND=%i,%i,%i,%i");
+
+}
+
+int LORA_FACTORY_RESET()
+{
+    uart_puts(uart0, "AT+SEND=%i,%i,%i,%i");
+
+}
+
+
