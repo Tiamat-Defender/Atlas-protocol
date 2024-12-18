@@ -42,13 +42,28 @@ uint8_t INIT_LORA(uint8_t TX, uint8_t RX, uint8_t UART_TYPE)
 
 uint8_t LORA_SEND()
 {
-    uart_puts(uart0, "AT+SEND=%i,%i,%i,%i");
+    char prefix[9] = "AT+SEND=";
+    char address[7] = "000000";
+    char payloadlength[4] = "1";
+    char data[240];
+
+    strcat(address,",");
+    strcat(payloadlength,",");
+    strcat(data,",");
+    
+    //add all the other bullshit up to get the size in bytes(yes its huge as fuck but I dont feel like making this code use less memory)
+    char result[260];
+
+    strcat(prefix, address);
+    strcat(result, payloadlength);
+    strcat(result, data);
+
+
+    uart_puts(uart0, result); 
 }
 
 uint8_t LORA_READ()
 {
-    uart_puts(uart0, "AT+SEND=%i,%i,%i,%i");
-
 
 }
 
