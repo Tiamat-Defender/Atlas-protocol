@@ -2,6 +2,10 @@
 #include "LORA/lora.h"
 #include "pico/stdlib.h"
 
+#include "FreeRTOS.h"
+#include "FreeRTOSConfig.h"
+#include "task.h"
+
 #define LORA_TX 0
 #define LORA_RX 1
 #define LORA_UART_NUMBER 0

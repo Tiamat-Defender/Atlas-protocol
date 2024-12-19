@@ -25,6 +25,16 @@ endif()
 # ====================================================================================
 set(PICO_BOARD pico_w CACHE STRING "Board type")
 
+FILE (GLOB FreeRTOS_src FreeRTOS-Kernel/*.c)
+
+#add the rtos library
+add_library(FreeRTOS STATIC
+            ${FreeRTOS_src}
+            FreeRTOS-Kernel/portable/GCC/ARM_CM0/port.c
+            FreeRTOS-Kernel/portable/MemMang/heap_4.c
+)
+
+
 # Pull in Raspberry Pi Pico SDK (must be before project)
 include(pico_sdk_import.cmake)
 
@@ -53,10 +63,17 @@ target_include_directories(AtlasPhoneOS PRIVATE
   ${CMAKE_CURRENT_LIST_DIR}
 )
 
+target_include_directories(FreeRTOS PUBLIC
+                           FreeRTOS-Kernel/include
+                           include/
+                           FreeRTOS-Kernel/portable/GCC/ARM_CM0
+                           
+)
+
 # Add any user requested libraries
 target_link_libraries(AtlasPhoneOS 
+                      FreeRTOS
         
         )
 
 pico_add_extra_outputs(AtlasPhoneOS)
-
