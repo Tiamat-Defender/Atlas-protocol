@@ -3,6 +3,7 @@
 #include <string.h>
 
 #define DEFBAUD 115200
+#define AT_OK  "+OK"
 
 uint8_t index = 0;
 
@@ -29,7 +30,7 @@ uint8_t INIT_LORA(uint8_t TX, uint8_t RX, uint8_t UART_TYPE)
                     if(index >= 4)
                     {
 
-                        if(strcmp(buff, "+ok"))return 0;
+                        if(strcmp(buff, AT_OK))return 0;
                         else return 1;
                     }
                 
@@ -42,6 +43,9 @@ uint8_t INIT_LORA(uint8_t TX, uint8_t RX, uint8_t UART_TYPE)
 
 uint8_t LORA_SEND()
 {
+    char buff[3];
+    int index = 0;
+
     char prefix[9] = "AT+SEND=";
     char address[7] = "000000";
     char payloadlength[4] = "1";
@@ -58,8 +62,20 @@ uint8_t LORA_SEND()
     strcat(result, payloadlength);
     strcat(result, data);
 
-
     uart_puts(uart0, result); 
+
+    while(true)
+    {
+        if(uart_is_readable(uart0))
+        {
+            buff[index] = uart_getc(uart0);
+            index ++;
+
+            if(index >= 4) if(strcmp(buff, AT_OK))return 0; else return 1;
+
+        }
+    }
+    
 }
 
 uint8_t LORA_READ()
