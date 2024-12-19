@@ -39,7 +39,7 @@ add_library(FreeRTOS STATIC
 include(pico_sdk_import.cmake)
 
 #pull in freeRTOS
-include(FreeRTOS_Kernel_import.cmake)
+include(FreeRTOS-Kernel/portable/ThirdParty/GCC/RP2040/FreeRTOS_Kernel_import.cmake)
 
 project(AtlasPhoneOS C CXX ASM)
 
