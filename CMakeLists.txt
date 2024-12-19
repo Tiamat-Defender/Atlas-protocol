@@ -38,7 +38,11 @@ add_library(FreeRTOS STATIC
 # Pull in Raspberry Pi Pico SDK (must be before project)
 include(pico_sdk_import.cmake)
 
+#pull in freeRTOS
+include(FreeRTOS_Kernel_import.cmake)
+
 project(AtlasPhoneOS C CXX ASM)
+
 
 # Initialise the Raspberry Pi Pico SDK
 pico_sdk_init()
@@ -55,9 +59,6 @@ pico_enable_stdio_usb(AtlasPhoneOS 0)
 
 set(BOARDS_INCLUDE_PATH "/home/preston/.pico-sdk/sdk/2.1.0/src/boards/include/boards")
 include_directories(${BOARDS_INCLUDE_PATH})
-
-#pull in freeRTOS
-include(FreeRTOS-Kernel/portable/ThirdParty/GCC/RP2040/FreeRTOS_Kernel_import.cmake)
 
 # Add the standard library to the build
 target_link_libraries(AtlasPhoneOS
@@ -77,7 +78,11 @@ target_include_directories(FreeRTOS PUBLIC
     FreeRTOS-Kernel/portable/ThirdParty/GCC/RP2040
     FreeRTOS-Kernel/
     FreeRTOS-Kernel/portable/ThirdParty/GCC/RP2040/include
+    ${PICO_SDK_PATH}/include
 )
+
+target_include_directories(FreeRTOS PUBLIC ${PICO_SDK_PATH}/include)
+
 
 # Add any user requested libraries
 pico_add_extra_outputs(AtlasPhoneOS)

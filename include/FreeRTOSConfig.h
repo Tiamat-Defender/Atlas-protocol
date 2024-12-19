@@ -2,7 +2,6 @@
 #define FREERTOS_CONFIG_H
 
 #include <stdint.h>
-#include "hardware/sync.h"
 
 /*-----------------------------------------------------------
  * Application-specific definitions.
