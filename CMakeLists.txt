@@ -27,11 +27,12 @@ set(PICO_BOARD pico_w CACHE STRING "Board type")
 
 FILE(GLOB FreeRTOS_src FreeRTOS-Kernel/*.c)
 
-#add the rtos library
-add_library( FreeRTOS STATIC
-	${FreeRTOS_src}
-	FreeRTOS-Kernel/portable/GCC/ARM_CM0/port.c
-	FreeRTOS-Kernel/portable/MemMang/heap_4.c
+# Add the FreeRTOS library
+add_library(FreeRTOS STATIC
+    ${FreeRTOS_src}
+    FreeRTOS-Kernel/portable/ThirdParty/GCC/RP2040/include
+    FreeRTOS-Kernel/portable/MemMang/heap_4.c
+    FreeRTOS-Kernel/portable/ThirdParty/GCC/RP2040
 )
 
 # Pull in Raspberry Pi Pico SDK (must be before project)
@@ -43,8 +44,7 @@ project(AtlasPhoneOS C CXX ASM)
 pico_sdk_init()
 
 # Add executable. Default name is the project name, version 0.1
-
-add_executable(AtlasPhoneOS AtlasPhoneOS.c )
+add_executable(AtlasPhoneOS AtlasPhoneOS.c)
 
 pico_set_program_name(AtlasPhoneOS "AtlasPhoneOS")
 pico_set_program_version(AtlasPhoneOS "0.1")
@@ -53,25 +53,31 @@ pico_set_program_version(AtlasPhoneOS "0.1")
 pico_enable_stdio_uart(AtlasPhoneOS 0)
 pico_enable_stdio_usb(AtlasPhoneOS 0)
 
+set(BOARDS_INCLUDE_PATH "/home/preston/.pico-sdk/sdk/2.1.0/src/boards/include/boards")
+include_directories(${BOARDS_INCLUDE_PATH})
+
+#pull in freeRTOS
+include(FreeRTOS-Kernel/portable/ThirdParty/GCC/RP2040/FreeRTOS_Kernel_import.cmake)
+
 # Add the standard library to the build
 target_link_libraries(AtlasPhoneOS
-        pico_stdlib)
+    pico_stdlib
+    FreeRTOS
+    FreeRTOS-kernel-Heap_4
+)
 
 # Add the standard include files to the build
 target_include_directories(AtlasPhoneOS PRIVATE
-  ${CMAKE_CURRENT_LIST_DIR}
+    ${CMAKE_CURRENT_LIST_DIR}
 )
 
-target_include_directories( FreeRTOS PUBLIC
-		FreeRTOS-Kernel/include
-		include/
-		FreeRTOS-Kernel/portable/GCC/ARM_CM0
-	)
+target_include_directories(FreeRTOS PUBLIC
+    FreeRTOS-Kernel/include
+    include/
+    FreeRTOS-Kernel/portable/ThirdParty/GCC/RP2040
+    FreeRTOS-Kernel/
+    FreeRTOS-Kernel/portable/ThirdParty/GCC/RP2040/include
+)
 
 # Add any user requested libraries
-target_link_libraries(AtlasPhoneOS 
-                      FreeRTOS
-        
-        )
-
 pico_add_extra_outputs(AtlasPhoneOS)
