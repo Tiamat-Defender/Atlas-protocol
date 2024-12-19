@@ -1,3 +1,6 @@
+#If you fuck with this your pull request will be denied instantly
+
+
 # This is a copy of <FREERTOS_KERNEL_PATH>/portable/ThirdParty/GCC/RP2040/FREERTOS_KERNEL_import.cmake
 
 # This can be dropped into an external project to help locate the FreeRTOS kernel

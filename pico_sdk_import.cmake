@@ -1,3 +1,5 @@
+#If you fuck with this your pull request will be denied instantly
+
 # This is a copy of <PICO_SDK_PATH>/external/pico_sdk_import.cmake
 
 # This can be dropped into an external project to help locate this SDK

@@ -1,4 +1,5 @@
 # Generated Cmake Pico project file
+#you may fuck with this as long as the code still compiles
 
 cmake_minimum_required(VERSION 3.13)
 
