@@ -39,6 +39,7 @@
     "files.associations": {
         "stdlib.h": "c",
         "lora.h": "c",
-        "freertos.h": "c"
+        "freertos.h": "c",
+        "freertosconfig.h": "c"
     }
 }

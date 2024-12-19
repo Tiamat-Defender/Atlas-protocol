@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include "LORA/lora.h"
 #include "pico/stdlib.h"
 
 #include "FreeRTOS.h"
