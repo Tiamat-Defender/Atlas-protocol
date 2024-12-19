@@ -2,6 +2,9 @@
 #include "hardware/uart.h"
 #include <string.h>
 
+#include "FreeRTOS.h"
+#include "task.h"
+
 #define DEFBAUD 115200
 #define AT_OK  "+OK"
 
@@ -83,9 +86,26 @@ uint8_t LORA_READ()
 
 }
 
+//finish getting UID
 uint8_t LORA_GET_UID()
-{
-    uart_puts(uart0, "AT+SEND=%i,%i,%i,%i");
+{   
+    int index = 0;
+    char buff[10];
+    uart_puts(uart0, "AT+UID?");
+
+    while(1)
+    {
+        if(uart_is_readable(uart0) && index <= 9)
+        {
+            buff[index] = uart_getc(uart0);
+            index++;
+        }else if(index = 10)
+        {
+            
+        }
+        else vTaskDelay(100);
+    }
+    
 }
 
 uint8_t LORA_SET_MODE()

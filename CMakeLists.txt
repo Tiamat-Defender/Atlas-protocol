@@ -52,6 +52,7 @@ pico_enable_stdio_usb(AtlasPhoneOS 0)
 # Add the standard include files to the build
 target_include_directories(AtlasPhoneOS PRIVATE ${CMAKE_CURRENT_LIST_DIR}
                            include/
+                           LORA/
 )
 
 # Add the standard library to the build
