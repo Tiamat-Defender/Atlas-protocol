@@ -44,7 +44,7 @@ uint8_t INIT_LORA(uint8_t TX, uint8_t RX, uint8_t UART_TYPE)
 
 }
 
-uint8_t LORA_SEND()
+uint8_t LORA_SEND(char adress[7], char len[4], char buffdata[240])
 {
     char buff[3];
     int index = 0;
@@ -52,7 +52,7 @@ uint8_t LORA_SEND()
     char prefix[9] = "AT+SEND=";
     char address[7] = "000000";
     char payloadlength[4] = "1";
-    char data[240];
+char data[240];
 
     strcat(address,",");
     strcat(payloadlength,",");
@@ -86,26 +86,8 @@ uint8_t LORA_READ()
 
 }
 
-//finish getting UID
 uint8_t LORA_GET_UID()
 {   
-    int index = 0;
-    char buff[10];
-    uart_puts(uart0, "AT+UID?");
-
-    while(1)
-    {
-        if(uart_is_readable(uart0) && index <= 9)
-        {
-            buff[index] = uart_getc(uart0);
-            index++;
-        }else if(index = 10)
-        {
-            
-        }
-        else vTaskDelay(100);
-    }
-    
 }
 
 uint8_t LORA_SET_MODE()
