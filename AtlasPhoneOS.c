@@ -1,44 +1,19 @@
-
-
+#include "pico/stdlib.h"
 #include "FreeRTOS.h"
-#include "FreeRTOSConfig.h"
 #include "task.h"
 
-#include "pico/stdlib.h"
-
-void fun1()
-{
-    gpio_init(0);
-    gpio_set_dir(0, GPIO_OUT);
-
-
-    while (1)
-    {
-        gpio_put(0, 1);
-        sleep_ms(100);
-        gpio_put(0, 0);
-        sleep_ms(100);          
+void vBlinkTask() {
+    for (;;) {
+        gpio_put(25, 1);
+        vTaskDelay(250);
+        gpio_put(25, 0);
+        vTaskDelay(250);
     }
-    
-
 }
 
-int main()
-{
-    stdio_init_all();
-
-    TaskHandle_t task1 = NULL;
-
-    uint32_t status = xTaskCreate(
-                        fun1,
-                        "task1",
-                        1024,
-                        NULL,
-                        tskIDLE_PRIORITY,
-                        &task1
-    );
-
+void main() {
+    gpio_init(25);
+    gpio_set_dir(25, GPIO_OUT);
+    xTaskCreate(vBlinkTask, "Blink Task", 128, NULL, 1, NULL);
     vTaskStartScheduler();
-
-    return 0;
 }
