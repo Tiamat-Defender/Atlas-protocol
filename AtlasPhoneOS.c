@@ -2,18 +2,20 @@
 #include "FreeRTOS.h"
 #include "task.h"
 
+#define PIN 0
+
 void vBlinkTask() {
     for (;;) {
-        gpio_put(25, 1);
+        gpio_put(PIN, 1);
         vTaskDelay(250);
-        gpio_put(25, 0);
+        gpio_put(PIN, 0);
         vTaskDelay(250);
     }
 }
 
 void main() {
-    gpio_init(25);
-    gpio_set_dir(25, GPIO_OUT);
+    gpio_init(PIN);
+    gpio_set_dir(PIN, GPIO_OUT);
     xTaskCreate(vBlinkTask, "Blink Task", 128, NULL, 1, NULL);
     vTaskStartScheduler();
 }
