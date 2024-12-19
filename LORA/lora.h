@@ -83,11 +83,8 @@ char data[240];
 
 uint8_t LORA_READ()
 {
+    
 
-}
-
-uint8_t LORA_GET_UID()
-{   
 }
 
 uint8_t LORA_SET_MODE()
