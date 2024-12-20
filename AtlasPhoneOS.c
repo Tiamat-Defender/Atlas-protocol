@@ -1,4 +1,6 @@
 #include "pico/stdlib.h"
+#include "lcd.h"
+
 #include "FreeRTOS.h"
 #include "task.h"
 
@@ -14,6 +16,9 @@ void vBlinkTask() {
 }
 
 void main() {
+
+    LCD_INIT();
+
     gpio_init(PIN);
     gpio_set_dir(PIN, GPIO_OUT);
     xTaskCreate(vBlinkTask, "Blink Task", 128, NULL, 1, NULL);

@@ -53,11 +53,13 @@ pico_enable_stdio_usb(AtlasPhoneOS 0)
 target_include_directories(AtlasPhoneOS PRIVATE ${CMAKE_CURRENT_LIST_DIR}
                            include/
                            LORA/
+                           LCD-LIB/
 )
 
 # Add the standard library to the build
 target_link_libraries(AtlasPhoneOS
     pico_stdlib
+    hardware_i2c
     FreeRTOS-Kernel
     FreeRTOS-Kernel-Heap4
 )
