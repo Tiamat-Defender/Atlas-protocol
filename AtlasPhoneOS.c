@@ -31,4 +31,6 @@ void main() {
 
     xTaskCreate(vBlinkTask, "Blink Task", 128, NULL, 1, NULL);
     vTaskStartScheduler();
+
+    return 0;
 }
