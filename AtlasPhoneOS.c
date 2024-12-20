@@ -8,7 +8,13 @@
 
 void LCD_INIT_TASK() {
     // Initialize I2C and LCD
-    lcdinit();
+    lcd_init();
+    lcd_set_cursor(1, 0);
+
+    lcd_string("ATLAS OS");
+
+    vTaskDelete(NULL);
+    
 }
 
 void vBlinkTask() {
@@ -32,5 +38,4 @@ void main() {
     xTaskCreate(vBlinkTask, "Blink Task", 128, NULL, 1, NULL);
     vTaskStartScheduler();
 
-    return 0;
 }
