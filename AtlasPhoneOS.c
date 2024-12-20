@@ -6,6 +6,11 @@
 
 #define PIN 0
 
+void LCD_INIT_TASK() {
+    // Initialize I2C and LCD
+    lcdinit();
+}
+
 void vBlinkTask() {
     for (;;) {
         gpio_put(PIN, 1);
@@ -17,10 +22,13 @@ void vBlinkTask() {
 
 void main() {
 
-    LCD_INIT();
+    sleep_ms(1000);
 
     gpio_init(PIN);
     gpio_set_dir(PIN, GPIO_OUT);
+
+    xTaskCreate(LCD_INIT_TASK, "LCD Init", 128, NULL, 1, NULL);
+
     xTaskCreate(vBlinkTask, "Blink Task", 128, NULL, 1, NULL);
     vTaskStartScheduler();
 }
