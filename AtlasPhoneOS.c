@@ -24,10 +24,9 @@ void LCD_STARTUP() {
 
 void vMainMenu() {
     lcd_clear();
-    
-
-
-
+    lcd_set_cursor(0, 0);
+    lcd_string("NO NEW MESSAGES.");
+    lcd_set_cursor(1 ,0);
 }
 
 void vBlinkTask() {
@@ -47,6 +46,8 @@ void main() {
     gpio_set_dir(PIN, GPIO_OUT);
 
     LCD_STARTUP();
+
+    vMainMenu();
 
     xTaskCreate(vBlinkTask, "Blink Task", 128, NULL, 1, NULL);
     vTaskStartScheduler();
