@@ -1,5 +1,7 @@
 #include "pico/stdlib.h"
 #include "lcd.h"
+#include "LORA/lora.h"
+#include "keypad.h"
 
 #include "FreeRTOS.h"
 #include "task.h"
