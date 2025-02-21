@@ -54,6 +54,7 @@ target_include_directories(AtlasPhoneOS PRIVATE ${CMAKE_CURRENT_LIST_DIR}
                            include/
                            LORA/
                            LCD-LIB/
+                           FreeRTOS-Kernel/
 )
 
 # Add the standard library to the build

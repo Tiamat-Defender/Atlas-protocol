@@ -1,18 +1,16 @@
 #include "pico/stdlib.h"
 #include "hardware/uart.h"
 #include <string.h>
-
 #include "FreeRTOS.h"
 #include "task.h"
 
 #define DEFBAUD 115200
 #define AT_OK  "+OK"
 
-uint8_t index = 0;
-
 uint8_t INIT_LORA(uint8_t TX, uint8_t RX, uint8_t UART_TYPE)
 {
     char buff[3];
+    int index = 0;
 
     gpio_set_function(TX, GPIO_FUNC_UART);
     gpio_set_function(RX, GPIO_FUNC_UART);

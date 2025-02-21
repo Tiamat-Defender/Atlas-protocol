@@ -21,6 +21,7 @@ void LCD_STARTUP() {
     lcd_string("Code for a");
     lcd_set_cursor(1, 1);
     lcd_string("Better future.");
+    sleep_ms(1000);
 }
 
 
